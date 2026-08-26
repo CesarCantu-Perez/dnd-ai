@@ -3,6 +3,7 @@ from ai.dm import DungeonMaster
 
 def main():
     dm = DungeonMaster()
+    conversation_history = []
 
     print("==============================")
     print("       DUNGEON MASTER AI")
@@ -17,7 +18,21 @@ def main():
             print("Goodbye!")
             break
 
-        response = dm.respond(player_input)
+        response = dm.respond(player_input, conversation_history)
+        conversation_history.append(
+            {
+                "role": "user",
+                "content": player_input
+            }
+        )
+
+        conversation_history.append(
+            {
+                "role": "assistant",
+                "content": response
+            }
+        )
+        
 
         print()
         print("DM:", response)
